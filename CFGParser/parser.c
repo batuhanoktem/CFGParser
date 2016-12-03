@@ -211,6 +211,7 @@ void readWords(char *words, char *results)
 					char *lastWord = (char*)malloc((wordCount + 1) * sizeof(char));
 					char *tempWord;
 					strcpy(lastWord, word);
+					free(word);
 					for (endIndex = wordCount - 1; endIndex >= 0; endIndex--)
 					{
 						for (startIndex = endIndex; startIndex >= 0; startIndex--)
@@ -238,7 +239,7 @@ void readWords(char *words, char *results)
 									tempWord[startIndex] = rule.left;
 									tempWord[startIndex + 1] = '\0';
 									strcat(tempWord, lastWord + endIndex + 1);
-
+									free(lastWord);
 									lastWord = tempWord;
 									wordCount -= length - 1;
 									endIndex = wordCount - 1;
@@ -249,10 +250,11 @@ void readWords(char *words, char *results)
 
 									break;
 								}
-
+								
 								if (accepted)
 									break;
 							}
+							free(wordPart);
 
 							if (accepted)
 								break;
@@ -282,9 +284,9 @@ void readWords(char *words, char *results)
 			{
 				wordCount++;
 				if (wordCount == 1)
-					word = (char*)malloc(sizeof(char));
+					word = (char*)malloc(2 * sizeof(char));
 				else
-					word = realloc(word, wordCount * sizeof(char));
+					word = realloc(word, (wordCount + 1) * sizeof(char));
 
 				word[wordCount - 1] = character;
 			}
