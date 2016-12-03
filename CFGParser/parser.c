@@ -46,7 +46,7 @@ int main(int argc, char *argv[])
 	return 0;
 }
 
-void readGrammar(char* grammar)
+void readGrammar(char *grammar)
 {
 	char character;
 	FILE *file = fopen(grammar, "r");
