@@ -274,6 +274,7 @@ void readWords(char *words, char *results)
 							if (j != 0)
 								fprintf(outputFile, " ");
 						}
+						free(acceptedRules);
 						fprintf(outputFile, "\n");
 					}
 				}
